@@ -29,10 +29,10 @@ remote_to_local <- function(file, format) {
     ## try to extract format from headers: read #403 about whether this code is doing anything
     h1 <- curl::parse_headers(u$headers)
     ## check `Content-Disposition` header
-    if (!any(grepl("^Content-Disposition", h1))) {
+    if (!any(startsWith(h1, "Content-Disposition"))) {
         stop("Unrecognized file format. Try specifying with the format argument.")
     }
-    h <- h1[grep("filename", h1, fixed = TRUE)]
+    h <- grep("filename", h1, fixed = TRUE, value = TRUE)
     if (length(h)) {
         f <- regmatches(h, regexpr("(?<=\")(.*)(?<!\")", h, perl = TRUE))
         if (!length(f)) {
