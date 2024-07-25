@@ -25,7 +25,7 @@ get_info <- function(file) {
     if (tolower(file) == "clipboard") {
         return(.query_format(input = "clipboard", file = "clipboard"))
     }
-    if (isFALSE(R.utils::isUrl(file))) {
+    if (!R.utils::isUrl(file)) {
         ext <- tolower(tools::file_ext(file))
     } else {
         parsed <- strsplit(strsplit(file, "?", fixed = TRUE)[[1]][1], "/", fixed = TRUE)[[1]]
