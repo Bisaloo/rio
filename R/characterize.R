@@ -39,17 +39,11 @@ factorize <- function(x, ...) {
 #' @export
 characterize.default <- function(x, ...) {
     # retain variable label, if present
-    if (!is.null(attributes(x)[["label"]])) {
-        varlab <- attributes(x)[["label"]]
-    } else {
-        varlab <- NULL
-    }
+    varlab <- attributes(x)[["label"]]
 
     if (!is.null(attributes(x)[["labels"]])) {
         x <- as.character(factorize(x, ...))
-        if (!is.null(varlab)) {
-            attr(x, "label") <- varlab
-        }
+        attr(x, "label") <- varlab
     }
 
     return(x)
@@ -66,11 +60,7 @@ characterize.data.frame <- function(x, ...) {
 #' @export
 factorize.default <- function(x, coerce_character=FALSE, ...) {
     # retain variable label, if present
-    if (!is.null(attributes(x)[["label"]])) {
-        varlab <- attributes(x)[["label"]]
-    } else {
-        varlab <- NULL
-    }
+    varlab <- attributes(x)[["label"]]
 
     if (!is.null(attributes(x)[["labels"]])) {
         x <- factor(x, attributes(x)[["labels"]], names(attributes(x)[["labels"]]), ...)
@@ -79,9 +69,7 @@ factorize.default <- function(x, coerce_character=FALSE, ...) {
         x <- factor(x, levs)
     }
 
-    if (!is.null(varlab)) {
-        attr(x, "label") <- varlab
-    }
+    attr(x, "label") <- varlab
 
     return(x)
 }
